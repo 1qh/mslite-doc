@@ -13,6 +13,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Carry no cloud save, online publishing, plugins, diagnostics, update check or online help in the menus; Help keeps About and the factory reset. Why: the factory reset recovers a broken settings file.
 - Save to the computer without asking where. Why: the cloud choice is the only other answer.
 - Show no "Get more sounds" link in the sound picker. Why: it opens an online store.
+- List every installed SoundFont's presets in 1 flat menu, under a large bold header per font fitted to its text, with no automatic choice row. Why: 1 click sets a sound.
 - Show no cloud save, publishing, video, MIDI mapping or braille preference page, and no online-sounds status or preferences. Why: each sets a feature the app does not carry.
 - Open with no welcome dialog, tours or account prompt. Why: the owner opens a score and plays it.
 
@@ -25,7 +26,10 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Show the piano keyboard panel while the score plays, and hide it when playback stops. Why: the keys matter only while sound plays.
 - Draw the app under a merged, untitled title bar through Qt's expanded client area, with the window's automatic safe-area padding removed. Why: the title strip only repeated the score's name.
 - Use the system font for the interface, which upstream already does on macOS. Why: the owner wants no other interface font.
-- Name the app MuseScoreLite with the bundle identifier `org.musescore.MuseScoreLite`, and keep upstream's machine-readable name. Why: its settings start fresh, and the data and extension folders the pipeline uses stay put.
+- Name the app MuseScoreLite with the bundle identifier `org.musescore.MuseScoreLite`. Why: its settings start fresh, apart from any other MuseScore.
+- Fill the screen's visible area when the window first opens, and keep a standard Window menu holding Fill, the tiling entries and Full Screen. Why: the owner fills the screen most, and the menu makes fn+Ctrl+F work.
+- Show no score tab strip, and hide invisible elements and layout marks once per opened score. Why: the sheet reads as it prints.
+- Run every command-line mode with no Dock icon. Why: the pipeline launches many converter processes.
 
 #### Data
 - Keep every piece of the app's data and the user's default folders directly in `~/mslite`, apart from any other MuseScore. Why: a shared folder let another MuseScore's saved layout override these defaults.
