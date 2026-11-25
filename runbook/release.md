@@ -11,5 +11,6 @@ The commands that turn the patches in `mslite` into a published MuseScoreLite, f
 
 ## Checks on their own
 - `sh mslite/window-check.sh <mscore> <score>`, `sh mslite/net-check.sh <mscore> <score>` and `sh mslite/export-check.sh <mscore> <score>` each print `ok` or name what failed.
+- `sh mslite/tools/drive-play.sh <score> <screenshot.png>` stages the compiled app beside this Mac's Qt, opens a score, starts playback and saves a screenshot.
 - `python mslite/prove.py` and `python mslite/prove_extension.py` compare served renders and extension runs with fresh launches, layout for layout.
 - The sheet pipeline's suite in `muse`, run with `MUSE_MSCORE` naming the built `mscore`, proves the app still serves the pipeline.
