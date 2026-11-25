@@ -24,6 +24,7 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 
 ## NEVER
 - Never store a signing certificate or API key in the fork, in `mslite`, or in a hosted builder. Cost: the fork is public, and every credential stays on 1 Mac.
+- Never commit on the fork under any identity but the owner's own git identity. Cost: a made-up name is a real GitHub user, credited with the owner's work.
 - Never judge Gatekeeper before notarizing. Cost: macOS rejects every not-yet-notarized app, so packaging always fails.
 
 ## Pitfall
