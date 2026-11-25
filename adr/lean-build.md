@@ -36,6 +36,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Make a reset remove only the app's own named files there (logs, layout, session, recent files, caches, extensions) and never anything else. Why: the same folder holds the user's soundfonts and scores.
 
 #### Bundled resources
+- Sound live input, a MIDI keyboard or a clicked key, while the score plays, on the playback timeline, and default the audio buffer to 128 samples with no larger reserve during playback. Why: the owner plays along, and upstream mutes live notes during playback and buffers about 20 ms ahead.
 - Play every track, the metronome included, only on the sound the owner picks from an installed soundfont, and leave a track with no pick silent. Why: the owner tries several soundfonts, so no default may choose for them.
 - Bundle no soundfont, no translations, plugins folder, test-automation scripts, alternate text fonts, braille tables, score templates, wallpapers or built-in extensions, and strip debug symbols. Why: the owner adds their own soundfont, and the rest serves nothing kept.
 - Keep the Leland, Leland Text, Edwin, FreeSerif, FreeSans, tablature and figured-bass fonts. Why: scores print with them.
