@@ -23,7 +23,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 #### Look and name
 - Open in the High-contrast Black theme with accent `#5E5E5E`, text and icons `#FFFFFF` and border `#212121`, not following the system theme, with score colours inverted. Why: the owner's own preference, applied on first launch.
 - Open the score page as the sheet alone: every toolbar, the palettes, instruments and properties panels, and the status bar start hidden and come back from the View menu. Why: the whole screen reads the sheet.
-- Show the piano keyboard panel while the score plays, and hide it when playback stops. Why: the keys matter only while sound plays.
+- Show the piano keyboard panel while the score plays, docked alone at the top, the whole keyboard fitted to the window's width and the panel to the keyboard's height, and hide it when playback stops. Why: the keys matter only while sound plays, and a fitted keyboard needs no resizing.
 - Draw the app under a merged, untitled title bar through Qt's expanded client area, with the window's automatic safe-area padding removed. Why: the title strip only repeated the score's name.
 - Use the system font for the interface, which upstream already does on macOS. Why: the owner wants no other interface font.
 - Name the app MuseScoreLite with the bundle identifier `org.musescore.MuseScoreLite`. Why: its settings start fresh, apart from any other MuseScore.
@@ -36,6 +36,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Make a reset remove only the app's own named files there (logs, layout, session, recent files, caches, extensions) and never anything else. Why: the same folder holds the user's soundfonts and scores.
 
 #### Bundled resources
+- Play whatever asks for the bundled default soundfont, the metronome above all, on the first installed soundfont by name that carries a drum kit. Why: no soundfont is bundled, so the metronome otherwise has nothing to sound with.
 - Bundle no soundfont, no translations, plugins folder, test-automation scripts, alternate text fonts, braille tables, score templates, wallpapers or built-in extensions, and strip debug symbols. Why: the owner adds their own soundfont, and the rest serves nothing kept.
 - Keep the Leland, Leland Text, Edwin, FreeSerif, FreeSans, tablature and figured-bass fonts. Why: scores print with them.
 
