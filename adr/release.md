@@ -30,6 +30,9 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - The link to the compile Mac is slow, so the app comes back by `rsync`, which sends only changed files after the first copy.
 - MuseScore hands a file to an already-running copy of itself and exits, so a check launching beside a running copy reads that copy's old log; the window check refuses when a copy runs.
 - `install_name_tool` invalidates the code signature, and macOS then kills the app at launch with no log.
+- A killed MuseScore marks its session unclean, and the next launch becomes a crash recovery that asks to restore the session and ignores the score passed in; every check and test quits the app through `quit-app.sh`, never `kill`.
+- A shell reads its script as it runs, so updating `mslite` on the compile Mac while `release.sh` runs there can splice the running build; update only between builds.
+- MuseScore's derived CMake options (such as a module's QML) keep their first cached value, so `release.sh` refuses a build with a module on and its QML off.
 
 ## Pairs with
 - `runbook/release.md` — the commands.
