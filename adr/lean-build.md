@@ -12,6 +12,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Show only Home and Score in the top bar, only scores on the home page, and no online scores tab or score manager. Why: the rest are online or learning surfaces.
 - Carry no cloud save, online publishing, plugins, diagnostics, update check or online help in the menus; Help keeps About and the factory reset. Why: the factory reset recovers a broken settings file.
 - Save to the computer without asking where. Why: the cloud choice is the only other answer.
+- Show no "Get more sounds" link in the sound picker. Why: it opens an online store.
 - Show no cloud save, publishing, video, MIDI mapping or braille preference page, and no online-sounds status or preferences. Why: each sets a feature the app does not carry.
 - Open with no welcome dialog, tours or account prompt. Why: the owner opens a score and plays it.
 
