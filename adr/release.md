@@ -20,7 +20,7 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 
 #### Signing and publishing
 - Sign with the owner's Developer ID Application certificate and notarize with the App Store Connect API key, both read from the owner's secrets folder, then staple the ticket. Why: a notarized, stapled app opens on any of the owner's Macs, offline included.
-- Publish each build to 1 GitHub Release of `1qh/MuseScore` per release branch, tagged `<branch>-muse`, replacing its `MuseScoreLite-<version>.dmg` and notes in place, with the upstream commit in the notes, and force-push the generated tree to the fork's `main` and that tag. Why: the other Macs install from 1 download link that always holds the newest build.
+- Publish each build as the only GitHub Release of `1qh/MuseScore`, named, tagged and filed (`MuseScoreLite-<hash>.dmg`) by the short hash of the upstream commit it is built on, delete every older release and its tag, and force-push the generated tree to the fork's `main`. Why: the app always tracks upstream's newest commit, so the hash is the whole version and 1 download is the only one needed.
 - Publish nothing when a patch fails to apply or a gate fails, and raise a notification naming the step. Why: an unattended release must never ship a half-patched app.
 
 ## NEVER
