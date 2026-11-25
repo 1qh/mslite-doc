@@ -9,7 +9,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Keep compiled every module whose QML another module imports — braille, learning, tours, cloud and the Muse Sounds store — and hide its surfaces instead. Why: QML resolves imports only at launch, so switching such a module off builds cleanly and opens no window.
 
 #### Hidden or removed surfaces
-- Show only Home and Score in the top bar, only scores on the home page, and no online scores tab or score manager. Why: the rest are online or learning surfaces.
+- Carry no home page and no page tabs: every start, and closing the last score, lands on the score page, and the app reopens the last score on launch. Why: the File menu's New, Open and Open Recent cover the home page.
 - Carry no cloud save, online publishing, plugins, diagnostics, update check or online help in the menus; Help keeps About and the factory reset. Why: the factory reset recovers a broken settings file.
 - Save to the computer without asking where. Why: the cloud choice is the only other answer.
 - Show no "Get more sounds" link in the sound picker. Why: it opens an online store.
@@ -20,9 +20,16 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Refuse every non-local request in the app's network manager, send every non-local QML request to an empty local answer, and open no web link. Why: hidden modules still call out at launch; refusing at the source stops every caller at once.
 
 #### Look and name
-- Open in the High-contrast Black theme with accent `#5E5E5E`, text and icons `#FFFFFF` and border `#212121`, not following the system theme, with score colours inverted, and with the piano keyboard panel open. Why: the owner's own preference, applied on first launch.
+- Open in the High-contrast Black theme with accent `#5E5E5E`, text and icons `#FFFFFF` and border `#212121`, not following the system theme, with score colours inverted. Why: the owner's own preference, applied on first launch.
+- Open the score page as the sheet alone: every toolbar, the palettes, instruments and properties panels, and the status bar start hidden and come back from the View menu. Why: the whole screen reads the sheet.
+- Show the piano keyboard panel while the score plays, and hide it when playback stops. Why: the keys matter only while sound plays.
+- Draw the app under a merged, untitled title bar through Qt's expanded client area, with the window's automatic safe-area padding removed. Why: the title strip only repeated the score's name.
 - Use the system font for the interface, which upstream already does on macOS. Why: the owner wants no other interface font.
 - Name the app MuseScoreLite with the bundle identifier `org.musescore.MuseScoreLite`, and keep upstream's machine-readable name. Why: its settings start fresh, and the data and extension folders the pipeline uses stay put.
+
+#### Data
+- Keep every piece of the app's data and the user's default folders directly in `~/mslite`, apart from any other MuseScore. Why: a shared folder let another MuseScore's saved layout override these defaults.
+- Make a reset remove only the app's own named files there (logs, layout, session, recent files, caches, extensions) and never anything else. Why: the same folder holds the user's soundfonts and scores.
 
 #### Bundled resources
 - Bundle no soundfont, no translations, plugins folder, test-automation scripts, alternate text fonts, braille tables, score templates, wallpapers or built-in extensions, and strip debug symbols. Why: the owner adds their own soundfont, and the rest serves nothing kept.
