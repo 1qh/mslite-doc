@@ -24,6 +24,7 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Publish nothing when a patch fails to apply or a gate fails, and raise a notification naming the step. Why: an unattended release must never ship a half-patched app.
 
 ## NEVER
+- Never run servers for the sheet pipeline from the installed app. Cost: macOS sends a file or Launchpad open to any running app with the same bundle identifier, so a server takes it and the owner gets a Dock icon with no window.
 - Never base the fork on upstream's `main`. Cost: it is the next version, thousands of commits away, and refactors daily under the patches.
 - Never run the pipeline or any check from the app inside the build tree. Cost: the next release deletes that tree, and the app with it, under a running build.
 - Never store a signing certificate or API key in the fork, in `mslite`, or in a hosted builder. Cost: the fork is public, and every credential stays on 1 Mac.
