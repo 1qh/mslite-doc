@@ -5,7 +5,7 @@ Owns what MuseScoreLite adds to upstream MuseScore: a small set of patches appli
 ## MUST
 #### The patch set
 - Keep the fork as the head of upstream's current release branch plus 1 patch file per need in `mslite`, applied in order by `release.sh`. Why: a patch set rebases onto each upstream fix, while a diverged branch drifts.
-- Treat the patch files in `mslite` as the source, and the fork's `release/<branch>` branch on GitHub as generated output. Why: `release.sh` re-clones upstream and applies the patches, overwriting any commit made on the branch.
+- Treat the patch files in `mslite` as the source, and the fork's `main`, its only branch, as generated output. Why: `release.sh` re-clones upstream and applies the patches, overwriting any commit made on the branch.
 - Change the app by editing a clean checkout, then regenerating that patch with `git diff` against the commit before it. Why: the patch is what the next release applies.
 - Carry exactly these patches, in this order: `serve`, `piano-playback`, `packaging`, `flat-picker`, `debloat`. Why: each answers a need upstream leaves open; nothing else differs from upstream.
 - Drop a patch the moment upstream ships its change. Why: a patch upstream already carries conflicts at the next release.
@@ -19,7 +19,8 @@ Owns what MuseScoreLite adds to upstream MuseScore: a small set of patches appli
 - `debloat`: every change to the app itself — build options passing through, the hidden and removed surfaces, the blocked network, the theme, the name and the bundled resources, each listed in `lean-build.md`. Why: 1 patch keeps every lean change in 1 place to rebase.
 
 ## NEVER
-- Never commit a change on the fork's release branch. Cost: the next release overwrites it.
+- Never keep a second branch on the fork. Cost: work split across branches drifts and hides which one ships.
+- Never commit a change on the fork's `main` by hand. Cost: the next release overwrites it.
 - Never release a build whose patches did not all apply cleanly. Cost: a half-patched app looks like ours and lacks a feature.
 
 ## Pairs with
