@@ -20,7 +20,8 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Refuse, in every gate, an app that ignores its quit for 10 seconds. Why: only a modal dialog holds a quit, and the reading app opens none.
 - Launch on an empty data folder, through `tools/fresh-launch.sh`, and refuse any window beside the score or an ignored quit. Why: a first launch opens straight onto the score.
 - Refuse, before the compile, an assignment to the implicit size of a Column, Row, Grid or Flow, and on the compile Mac any unit-test failure of the patched modules that the untouched upstream base does not share. Why: QML refuses the first only at launch, and a test that no release runs proves nothing.
-- Drive every floating panel before a release and read each capture for a scroll bar, a clipped row or an empty band. Why: accessibility cannot see QML scroll bars, so no script judges the fit.
+- Drive every floating panel before a release: the drive refuses an empty band beside a panel's content and any window reaching past the screen's visible area, and every capture is read for a scroll bar or a clipped row. Why: a capture of 1 window cannot show where it sits, and accessibility cannot see QML scroll bars.
+- Click a page in the floating Navigator and refuse the run unless the score view moves, against a 2nd capture taken with no click. Why: a Navigator painted at the wrong scale still draws, while its clicks land on the wrong page.
 - Run every gate again on the packaged app. Why: packaging removes Qt parts and can break what ran before it.
 
 #### Codex lanes on the build tree

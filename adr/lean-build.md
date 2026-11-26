@@ -32,7 +32,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Name the app MuseScoreLite with the bundle identifier `org.musescore.MuseScoreLite`, and keep its settings and saved layout under that bundle identifier, so every copy with its own identifier keeps its own. Why: the official MuseScore, the pipeline's copy and a test copy never read or write each other's settings.
 - Fill the screen's visible area when the window first opens, and keep a standard Window menu holding Fill, the tiling entries and Full Screen. Why: the owner fills the screen most, and the menu makes fn+Ctrl+F work.
 - Show no score tab strip, and hide invisible elements and layout marks once per opened score. Why: the sheet reads as it prints.
-- Open every toggleable panel and toolbar but the piano keyboard floating, sized to its own content. Why: the sheet keeps the whole window, and a panel shows only while it is wanted.
+- Open every toggleable panel and toolbar but the piano keyboard floating, sized to its own content and kept inside the screen's visible area. Why: the sheet keeps the whole window, a panel shows only while it is wanted, and a panel that grows past the screen's edge hides its own content.
 - Give the mixer only the sound picker, the volume fader and the mute and solo toggles per track, with no audio effects, aux sends or pan. Why: the owner picks a sound and sets a level, nothing more.
 - Default the piano keyboard to 61 keys. Why: the owner's keyboard range, and wider keys at the same width.
 - Run every command-line mode with no Dock icon. Why: the pipeline launches many converter processes.
