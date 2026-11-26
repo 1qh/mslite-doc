@@ -28,7 +28,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Take the layer colours, in order, from Okabe–Ito and Kelly's contrast palettes, keeping only colours of relative luminance 0.2 or more and high saturation, ordered so that no 2 neighbours share a hue family. Why: a lit key must read on a black key and on a white one, and neighbouring layers must never look alike.
 - Draw the app under a merged, untitled title bar through Qt's expanded client area, with the window's automatic safe-area padding removed. Why: the title strip only repeated the score's name.
 - Use the system font for the interface, which upstream already does on macOS. Why: the owner wants no other interface font.
-- Name the app MuseScoreLite with the bundle identifier `org.musescore.MuseScoreLite`. Why: its settings start fresh, apart from any other MuseScore.
+- Name the app MuseScoreLite with the bundle identifier `org.musescore.MuseScoreLite`, and keep its settings and saved layout under that bundle identifier, so every copy with its own identifier keeps its own. Why: the official MuseScore, the pipeline's copy and a test copy never read or write each other's settings.
 - Fill the screen's visible area when the window first opens, and keep a standard Window menu holding Fill, the tiling entries and Full Screen. Why: the owner fills the screen most, and the menu makes fn+Ctrl+F work.
 - Show no score tab strip, and hide invisible elements and layout marks once per opened score. Why: the sheet reads as it prints.
 - Open every toggleable panel and toolbar but the piano keyboard floating, sized to its own content. Why: the sheet keeps the whole window, and a panel shows only while it is wanted.
