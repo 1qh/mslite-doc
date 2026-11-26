@@ -23,6 +23,10 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Drive every floating panel before a release and read each capture for a scroll bar, a clipped row or an empty band. Why: accessibility cannot see QML scroll bars, so no script judges the fit.
 - Run every gate again on the packaged app. Why: packaging removes Qt parts and can break what ran before it.
 
+#### Codex lanes on the build tree
+- Inline these hazards into every lane brief that edits `mscore-release`, since a lane reads no doc outside its prompt: the tree builds with C++17 rules for the test targets (no `contains` on maps or sets, use `find`); a test mock may override only a virtual method; a QML Column, Row, Grid or Flow computes its own implicit size, so never assign it; every new QML import names a folder a CMake list compiles; a lane never builds, runs, tests or commits. Why: each hazard cost a full compile round when a lane met it unbriefed.
+- Give a lane that changes shared dock code (`src/framework/dockwindow`) the whole tree alone, and drive every floating panel after it. Why: every panel's window passes through it, so a fix aimed at one panel changes all 9.
+
 #### Signing and publishing
 - Sign with the owner's Developer ID Application certificate and notarize with the App Store Connect API key, both read from the owner's secrets folder, then staple the ticket. Why: a notarized, stapled app opens on any of the owner's Macs, offline included.
 - Publish each build as the only GitHub Release of `1qh/MuseScore`, named, tagged and filed (`MuseScoreLite-<hash>.dmg`) by the short hash of the upstream commit it is built on, delete every older release and its tag, and force-push the generated tree to the fork's `main`. Why: the app always tracks upstream's newest commit, so the hash is the whole version and 1 download is the only one needed.
