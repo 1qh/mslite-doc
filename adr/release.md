@@ -14,7 +14,8 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 
 #### Gates, before and after packaging
 - Launch the app on a score and refuse it when its log reports the main window failed to load, and when another copy is running. Why: a missing QML module leaves a windowless app; a running copy takes the score.
-- Watch the app's sockets for 45 seconds and refuse any internet socket. Why: the app is offline by design, and a hidden module's request is invisible on screen.
+- Refuse, before the compile, a relative QML import of a folder no CMake list compiles in. Why: QML resolves imports only at launch, so the import builds cleanly and opens no window.
+- Watch the app's sockets for 45 seconds and refuse any internet socket, and refuse a watch that sampled fewer than once every 2 seconds. Why: the app is offline by design, and a loaded machine samples too rarely to see a short request.
 - Export PDF, measure positions, MIDI, MusicXML and a MuseScore file, and refuse any missing or empty. Why: a switched-off module fails only when the pipeline asks for its format.
 - Run all 3 gates again on the packaged app. Why: packaging removes Qt parts and can break what ran before it.
 
