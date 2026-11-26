@@ -43,6 +43,8 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Never judge Gatekeeper before notarizing. Cost: macOS rejects every not-yet-notarized app, so packaging always fails.
 
 ## Pitfall
+- Every built or staged app carries the release's own bundle identifier, and macOS opens a double-clicked score in any registered copy, an old staged build included; `release.sh` takes its build-tree copies out of Launch Services, and a staged copy is made under the test identifier only.
+- A copy of a quarantined app is signed ad hoc and Gatekeeper refuses to open it, so `pipeline-copy.sh` drops the inherited quarantine.
 - A 2nd quit request sent while the 1st is still closing a score raises the save dialog by itself, so a probe that quits with Command-Q and then at once with `terminate` reports a changed score that the owner never sees; quit once, the owner's way, wait for the exit, and only then fall back.
 - A score that saves a sound absent from the installed soundfonts opens with the engine applying something else, and the app must not count that as an edit; the metronome probe's saved missing sound is the control that refuses a build asking to save on close.
 - Deleting a model's items inside its reset, or before a list property announces its change, leaves the delegates still holding them reading null; every binding on them logs a TypeError, so items are handed to `deleteLater`.
