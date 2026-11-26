@@ -19,6 +19,8 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Export PDF, measure positions, MIDI, MusicXML and a MuseScore file, and refuse any missing or empty. Why: a switched-off module fails only when the pipeline asks for its format.
 - Refuse, in every gate, an app that ignores its quit for 10 seconds. Why: only a modal dialog holds a quit, and the reading app opens none.
 - Launch on an empty data folder, through `tools/fresh-launch.sh`, and refuse any window beside the score or an ignored quit. Why: a first launch opens straight onto the score.
+- Refuse, before the compile, an assignment to the implicit size of a Column, Row, Grid or Flow, and on the compile Mac any unit-test failure of the patched modules that the untouched upstream base does not share. Why: QML refuses the first only at launch, and a test that no release runs proves nothing.
+- Drive every floating panel before a release and read each capture for a scroll bar, a clipped row or an empty band. Why: accessibility cannot see QML scroll bars, so no script judges the fit.
 - Run all 3 gates again on the packaged app. Why: packaging removes Qt parts and can break what ran before it.
 
 #### Signing and publishing
@@ -35,6 +37,10 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Never judge Gatekeeper before notarizing. Cost: macOS rejects every not-yet-notarized app, so packaging always fails.
 
 ## Pitfall
+- A private TMPDIR exported to a whole script also reaches osascript, which then loses the app's menu bar; give it to the app's own launch only.
+- System Events exposes a menu bar only for the frontmost app, and an app loses its menu bar to accessibility after a floating panel opens until it is brought forward again; bring it forward before every menu click.
+- AppKit redraws the application menu with the app's own name when the app becomes active, without changing the menu item's title, so a title equal to the target is set again through an empty one.
+- A floating window grows to its content through the dock's layout constraints but never shrinks with it; the dock resizes a floating window it fills alone to its size before the change plus the content's change.
 - The link to the compile Mac is slow, so the app comes back by `rsync`, which sends only changed files after the first copy.
 - MuseScore hands a file to an already-running copy of itself and exits, so a check launching beside a running copy reads that copy's old log; the window check refuses when a copy runs.
 - `install_name_tool` invalidates the code signature, and macOS then kills the app at launch with no log.
