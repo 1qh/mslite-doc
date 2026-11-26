@@ -48,6 +48,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Let a pick a score saves win over the remembered one for that score, and leave a track whose position has no remembered pick silent. Why: every sound stays one the owner chose, and nothing is guessed.
 - Treat what the audio engine applies while a score's tracks are added (a remembered pick, a saved sound absent from the installed soundfonts, output and aux settings) as no edit of the score, so opening a score never asks the owner to save it on close. Why: the remembered sound applies to every score, so a save prompt would follow every song.
 - Reach the silent state through a silent synthesizer, never through a failed lookup. Why: a track with no pick keeps its mixer row and logs no error or assert.
+- Carry no default sound at all: a pick the installed soundfonts lack goes straight to the silent synthesizer, with no fallback lookup of any other sound. Why: a default would choose for the owner, and one that is not bundled only adds a failed lookup and an error line.
 - Bundle no soundfont, no translations, plugins folder, test-automation scripts, alternate text fonts, braille tables, score templates, wallpapers or built-in extensions, and strip debug symbols. Why: the owner adds their own soundfont, and the rest serves nothing kept.
 - Keep the Leland, Leland Text, Edwin, FreeSerif, FreeSans, tablature and figured-bass fonts. Why: scores print with them.
 
