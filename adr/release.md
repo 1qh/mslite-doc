@@ -21,6 +21,7 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Launch on an empty data folder, through `tools/fresh-launch.sh`, and refuse any window beside the score or an ignored quit. Why: a first launch opens straight onto the score.
 - Refuse, before the compile, an assignment to the implicit size of a Column, Row, Grid or Flow, and on the compile Mac any unit-test failure of the patched modules that the untouched upstream base does not share. Why: QML refuses the first only at launch, and a test that no release runs proves nothing.
 - Drive every floating panel before a release: the drive refuses an empty band beside a panel's content and any window reaching past the screen's visible area, and every capture is read for a scroll bar or a clipped row. Why: a capture of 1 window cannot show where it sits, and accessibility cannot see QML scroll bars.
+- Refuse, in every drive, any QML `TypeError`, `ReferenceError` or failed assignment in the app's log. Why: a binding naming something absent leaves its control dead while the window looks whole, and these lines are its only trace.
 - Click a page in the floating Navigator and refuse the run unless the score view moves, against a 2nd capture taken with no click. Why: a Navigator painted at the wrong scale still draws, while its clicks land on the wrong page.
 - Run every gate again on the packaged app. Why: packaging removes Qt parts and can break what ran before it.
 
@@ -42,6 +43,9 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Never judge Gatekeeper before notarizing. Cost: macOS rejects every not-yet-notarized app, so packaging always fails.
 
 ## Pitfall
+- Deleting a model's items inside its reset, or before a list property announces its change, leaves the delegates still holding them reading null; every binding on them logs a TypeError, so items are handed to `deleteLater`.
+- Moving a QML block out of the component that defined an id leaves its references resolving to whatever the new scope names that id; in the notation page, `notationView` is already the score's paint view.
+- A cursor intersected with content that is not laid out yet is empty, and a refit that re-applies the empty result keeps it empty; keep the source rectangle and intersect it again on every refit.
 - A private TMPDIR exported to a whole script also reaches osascript, which then loses the app's menu bar; give it to the app's own launch only.
 - System Events exposes a menu bar only for the frontmost app, and an app loses its menu bar to accessibility after a floating panel opens until it is brought forward again; bring it forward before every menu click.
 - AppKit redraws the application menu with the app's own name when the app becomes active, without changing the menu item's title, so a title equal to the target is set again through an empty one.
