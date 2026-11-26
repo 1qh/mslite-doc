@@ -24,6 +24,8 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Open in the High-contrast Black theme with accent `#5E5E5E`, text and icons `#FFFFFF` and border `#212121`, not following the system theme, with score colours inverted. Why: the owner's own preference, applied on first launch.
 - Open the score page as the sheet alone: every toolbar, the palettes, instruments and properties panels, and the status bar start hidden and come back from the View menu. Why: the whole screen reads the sheet.
 - Show the piano keyboard panel while the score plays, docked alone at the top, the whole keyboard fitted to the window's width and the panel to the keyboard's height, and hide it when playback stops. Why: the keys matter only while sound plays, and a fitted keyboard needs no resizing.
+- Light each sounding key in the colour of the highest layer playing it: the owner's live notes first, then staff 1, staff 2 and every later staff in order, then the chord track. Why: the owner sees at a glance which part plays which key, and their own playing above all.
+- Take the layer colours, in order, from Okabe–Ito and Kelly's contrast palettes, keeping only colours of relative luminance 0.2 or more and high saturation, ordered so that no 2 neighbours share a hue family. Why: a lit key must read on a black key and on a white one, and neighbouring layers must never look alike.
 - Draw the app under a merged, untitled title bar through Qt's expanded client area, with the window's automatic safe-area padding removed. Why: the title strip only repeated the score's name.
 - Use the system font for the interface, which upstream already does on macOS. Why: the owner wants no other interface font.
 - Name the app MuseScoreLite with the bundle identifier `org.musescore.MuseScoreLite`. Why: its settings start fresh, apart from any other MuseScore.
@@ -38,6 +40,9 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 #### Bundled resources
 - Sound live input, a MIDI keyboard or a clicked key, while the score plays, on the playback timeline, and default the audio buffer to 128 samples with no larger reserve during playback. Why: the owner plays along, and upstream mutes live notes during playback and buffers about 20 ms ahead.
 - Play every track, the metronome included, only on the sound the owner picks from an installed soundfont, and leave a track with no pick silent. Why: the owner tries several soundfonts, so no default may choose for them.
+- Remember the owner's last pick per staff position (staff 1, staff 2, and so on, whatever the instrument), and per the metronome and the chord track in a slot each, in `~/mslite`, and give it to every track whose score saves no pick, every new score included. Why: the owner sets a song's sounds once and every later song opens playing them.
+- Let a pick a score saves win over the remembered one for that score, and leave a track whose position has no remembered pick silent. Why: every sound stays one the owner chose, and nothing is guessed.
+- Reach the silent state through a silent synthesizer, never through a failed lookup. Why: a track with no pick keeps its mixer row and logs no error or assert.
 - Bundle no soundfont, no translations, plugins folder, test-automation scripts, alternate text fonts, braille tables, score templates, wallpapers or built-in extensions, and strip debug symbols. Why: the owner adds their own soundfont, and the rest serves nothing kept.
 - Keep the Leland, Leland Text, Edwin, FreeSerif, FreeSans, tablature and figured-bass fonts. Why: scores print with them.
 
