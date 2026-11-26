@@ -4,9 +4,9 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 
 ## MUST
 #### Switched off through upstream's module options
-- Switch off updates, test automation, VST and audio plugin hosts, the Finder Quick Look extension, translations, the Muse Sounds engine, and the Guitar Pro, MEI, MNX, BB, BWW, Capella, OVE, MuseData, TablEdit, lyrics, video and audio import or export modules. Why: none serves playback or the pipeline.
+- Switch off updates, network, cloud, learning, tours, braille, the Muse Sounds store and engine, test automation, VST and audio plugin hosts, the Finder Quick Look extension, translations, and the Guitar Pro, MEI, MNX, BB, BWW, Capella, OVE, MuseData, TablEdit, lyrics, video and audio import or export modules. Why: none serves playback or the pipeline.
 - Keep MusicXML, PDF and MIDI import and export, measure positions, notation, playback, the converter and extensions. Why: the pipeline imports MusicXML, renders PDF and positions, runs extensions, and exports MIDI for its chord-playback check.
-- Keep compiled every module whose QML another module imports — braille, learning, tours, cloud and the Muse Sounds store — and hide its surfaces instead. Why: QML resolves imports only at launch, so switching such a module off builds cleanly and opens no window.
+- Remove every QML import, registration and page of a module in the same change that switches it off. Why: QML resolves imports only at launch, so a switched-off module still imported builds cleanly and opens no window.
 
 #### Hidden or removed surfaces
 - Carry no home page and no page tabs: every start, and closing the last score, lands on the score page, and the app reopens the last score on launch. Why: the File menu's New, Open and Open Recent cover the home page.
@@ -14,7 +14,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Save to the computer without asking where. Why: the cloud choice is the only other answer.
 - Carry no surface that reaches the internet, removed rather than disabled: no "Get more sounds" or "Get more effects" link in the mixer, no online, cloud, publishing, sharing, help, handbook, accessibility-statement or file-conversion action registered at all (so none appears in shortcuts either), no links in the About dialog, and no language-download, welcome-screen or update-check section in preferences. Why: the app is offline by design, and a dead control is still clutter.
 - List every installed SoundFont's presets in 1 flat menu, under a large bold header per font fitted to its text, with no automatic choice row. Why: 1 click sets a sound.
-- Show no cloud save, publishing, video, MIDI mapping or braille preference page, and no online-sounds status or preferences. Why: each sets a feature the app does not carry.
+- Carry no online sounds, cloud save or open, publishing, upload, file-to-score conversion, welcome dialog, first-launch setup or update prompt in the code, and no video, MIDI mapping or braille preference page. Why: each serves only the internet or a feature the app does not carry.
 - Open with no welcome dialog, tours or account prompt. Why: the owner opens a score and plays it.
 
 #### Offline
@@ -42,7 +42,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Keep the Leland, Leland Text, Edwin, FreeSerif, FreeSans, tablature and figured-bass fonts. Why: scores print with them.
 
 ## NEVER
-- Never switch off a module another module's QML imports. Cost: the app runs with no window and every build-time check passes.
+- Never switch off a module while any QML still imports it. Cost: the app runs with no window and every build-time check passes.
 - Never switch off an export format the pipeline asks for. Cost: the pipeline stops at its first song, after the release already shipped.
 
 ## Pitfall
