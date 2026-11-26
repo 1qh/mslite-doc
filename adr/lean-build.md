@@ -4,8 +4,10 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 
 ## MUST
 #### Switched off through upstream's module options
-- Switch off updates, network, cloud, learning, tours, braille, the Muse Sounds store and engine, test automation, VST and audio plugin hosts, the Finder Quick Look extension, translations, and the Guitar Pro, MEI, MNX, BB, BWW, Capella, OVE, MuseData, TablEdit, lyrics, video and audio import or export modules. Why: none serves playback or the pipeline.
+- Switch off updates, network, cloud, learning, tours, braille, the Muse Sounds store and engine, test automation, VST and audio plugin hosts, the Finder Quick Look extension, translations, and the Guitar Pro, MEI, MNX, BB, BWW, Capella, OVE, MuseData, TablEdit and lyrics import or export modules. Why: none serves playback, the pipeline or the practice video.
 - Keep MusicXML, PDF and MIDI import and export, measure positions, notation, playback, the converter and extensions. Why: the pipeline imports MusicXML, renders PDF and positions, runs extensions, and exports MIDI for its chord-playback check.
+- Keep the video and audio export modules, and export the owner's practice video through `--view-mode practice`: 3840 by 2160 at 30 frames a second in HEVC through VideoToolbox with AAC, the piano keyboard painted by its own view and lit by the playback layers, the line holding the playback position above the next line in playback order, painted by the notation painter in the High-contrast Black look with the score inverted, the app's own playback cursor, 1 bar of count-in, the metronome through the whole song, and the last frame held 2 seconds. Why: every element is the app's own, so the video looks and sounds exactly like playing along in the app, with no second drawing of anything.
+- Encode through the ffmpeg the Mac has installed by Homebrew, which upstream's encoder finds in `/opt/homebrew/lib` and resolves by version; bundle none. Why: the encoder is upstream's own and loads ffmpeg at run time, and a bundled copy would only add size to every other use of the app.
 - Remove every QML import, registration and page of a module in the same change that switches it off. Why: QML resolves imports only at launch, so a switched-off module still imported builds cleanly and opens no window.
 
 #### Hidden or removed surfaces
