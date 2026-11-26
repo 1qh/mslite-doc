@@ -43,6 +43,8 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Never judge Gatekeeper before notarizing. Cost: macOS rejects every not-yet-notarized app, so packaging always fails.
 
 ## Pitfall
+- A 2nd quit request sent while the 1st is still closing a score raises the save dialog by itself, so a probe that quits with Command-Q and then at once with `terminate` reports a changed score that the owner never sees; quit once, the owner's way, wait for the exit, and only then fall back.
+- A score that saves a sound absent from the installed soundfonts opens with the engine applying something else, and the app must not count that as an edit; the metronome probe's saved missing sound is the control that refuses a build asking to save on close.
 - Deleting a model's items inside its reset, or before a list property announces its change, leaves the delegates still holding them reading null; every binding on them logs a TypeError, so items are handed to `deleteLater`.
 - Moving a QML block out of the component that defined an id leaves its references resolving to whatever the new scope names that id; in the notation page, `notationView` is already the score's paint view.
 - A cursor intersected with content that is not laid out yet is empty, and a refit that re-applies the empty result keeps it empty; keep the source rectangle and intersect it again on every refit.
