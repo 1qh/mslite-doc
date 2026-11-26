@@ -12,7 +12,7 @@ Owns what MuseScoreLite leaves out, keeps and hides: playback with the piano hig
 - Carry no home page and no page tabs: every start, and closing the last score, lands on the score page, and the app reopens the last score on launch. Why: the File menu's New, Open and Open Recent cover the home page.
 - Carry no cloud save, online publishing, plugins, diagnostics, update check or online help in the menus; Help keeps About and the factory reset. Why: the factory reset recovers a broken settings file.
 - Save to the computer without asking where. Why: the cloud choice is the only other answer.
-- Show no "Get more sounds" link in the sound picker. Why: it opens an online store.
+- Carry no surface that reaches the internet, removed rather than disabled: no "Get more sounds" or "Get more effects" link in the mixer, no online, cloud, publishing, sharing, help, handbook, accessibility-statement or file-conversion action registered at all (so none appears in shortcuts either), no links in the About dialog, and no language-download, welcome-screen or update-check section in preferences. Why: the app is offline by design, and a dead control is still clutter.
 - List every installed SoundFont's presets in 1 flat menu, under a large bold header per font fitted to its text, with no automatic choice row. Why: 1 click sets a sound.
 - Show no cloud save, publishing, video, MIDI mapping or braille preference page, and no online-sounds status or preferences. Why: each sets a feature the app does not carry.
 - Open with no welcome dialog, tours or account prompt. Why: the owner opens a score and plays it.
