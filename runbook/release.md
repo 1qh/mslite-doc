@@ -9,6 +9,7 @@ The commands that turn the patches in `mslite` into a published MuseScoreLite, f
 4. Schedule the daily check once per Mac: `sh mslite/schedule.sh <secrets folder> <any .mscz>` installs the LaunchAgent `org.mslite.auto-release`, which runs `mslite/auto-release.sh` at 04:00, logging to `~/Library/Logs/mslite-release`; it releases when the release branch head differs from the commit the current release's notes name, and raises a notification on any failure.
 5. Install the released disk image into Applications, then copy it for the sheet pipeline with `sh mslite/pipeline-copy.sh <installed .app> <pipeline .app>`, which gives the copy its own bundle identifier.
 6. To package without publishing, add `MSCORE_SKIP_PUBLISH=1` to step 2; the disk image lands in the build tree's `applebuild` folder.
+7. To keep every app check off the releasing Mac's screen, add `MSCORE_CHECK_HOST=<second Mac>` and `MSCORE_CHECK_REMOTE_SCORE=<the check score's path there>` to step 2 or 3: the packaged app is copied to the second Mac and `tools/remote-checks.sh` runs every gate and feature check there from its clone of `mslite`, refusing a clone at any other commit. Without them the checks run on the releasing Mac.
 
 ## Checks on their own
 Every check launches only a test copy under `org.musescore.MuseScoreLite.test` (made by `sh mslite/pipeline-copy.sh <app> <copy> org.musescore.MuseScoreLite.test`), whose settings `tools/test-app.sh` wipes first, with its own empty home and temp folder, so none reads the owner's settings or data or reaches the owner's open app.
@@ -19,6 +20,9 @@ Every check launches only a test copy under `org.musescore.MuseScoreLite.test` (
 - `sh mslite/tools/menu-title.sh <mscore> <launches> <score>...` reads the application menu's title 4 times per launch and refuses any that is not the score's name.
 - `python3 -m tools.metronome_pick <mscore> <score>` and `python3 -m tools.remember_probe <mscore> <score>`, run inside `mslite`, prove a saved metronome pick and a remembered staff pick reach the audio engine.
 - `sh mslite/tools/isolation-check.sh <mscore> <score>` proves a test launch cannot reach a running copy, against a listener it starts itself.
+- `sh mslite/tools/keyboard-check.sh <mscore> <score> <folder>` opens the piano keyboard, plays and pauses, and refuses a keyboard gone after the pause or a lit key in grey.
+- `sh mslite/tools/practice-check.sh <mscore> <score> <folder>` exports a practice video with `--view-mode practice` and refuses anything but 3840 by 2160 HEVC with AAC, sound after the count-in and clicks within it.
+- `sh mslite/tools/app-checks.sh <app> <score> gates|features` runs the release's gates or feature checks on a copy of an app, on whichever Mac runs it.
 - `sh mslite/tools/close-reopen.sh <app> <score>` closes the window with its red button and reopens on the same data folder.
 - `sh mslite/tools/unit-tests.sh <source tree> <test build folder> <Qt folder> <deps folder>` on the compile Mac builds and runs the patched modules' tests; `sh mslite/tools/plant.sh` plants a defect in 1 source line, rebuilds 1 target and restores it, the mutation control for a test.
 - `python3 mslite/tools/palette.py` derives the key layer colours from luminance, saturation and hue.
