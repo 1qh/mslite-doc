@@ -44,6 +44,7 @@ Owns where MuseScoreLite is built, the gates every build passes, and how it is s
 - Never judge Gatekeeper before notarizing. Cost: macOS rejects every not-yet-notarized app, so packaging always fails.
 
 ## Pitfall
+- The packager's ERR trap ends the script on any failing command outside a condition, so a retry loop testing `$?` after `hdiutil detach` never retries; a busy disk image, as Spotlight leaves a fresh mount, failed the release at its first try. The detach sits in the `if` condition.
 - `cp` on APFS clones a file and keeps its old modification time, so a source restored from a copy looks older than the object built from the planted line and ninja keeps the planted binary; `plant.sh` touches the restored file.
 - Every built or staged app carries the release's own bundle identifier, and macOS opens a double-clicked score in any registered copy, an old staged build included; `release.sh` takes its build-tree copies out of Launch Services, and a staged copy is made under the test identifier only.
 - A copy of a quarantined app is signed ad hoc and Gatekeeper refuses to open it, so `pipeline-copy.sh` drops the inherited quarantine.
